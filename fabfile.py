@@ -9,7 +9,7 @@ from fabric.api import *
 
 import os
 
-env.hosts = ['leobreslav@134.0.118.26:2392']
+env.hosts = ['leobreslav@80.78.254.143']
 
 # Uncomment to ignore execution errors and continue executing
 # See http://docs.fabfile.org/en/1.4.1/usage/execution.html#failure-handling
@@ -42,13 +42,13 @@ def deploy():
         run('git pull origin master')
 
         # install requirements
-        run('../venv/bin/pip3 install -r ./requirements.txt')
+        run('../LBBASEVENV/bin/pip3 install -r ./requirements.txt')
 
         # migrate data
-        run('../venv/bin/python manage.py migrate')
+        run('../LBBASEVENV/bin/python manage.py migrate')
 
         # collect static
-        run('../venv/bin/python manage.py collectstatic')
+        run('../LBBASEVENV/bin/python manage.py collectstatic')
 
     # Start gunicorn
     start()
