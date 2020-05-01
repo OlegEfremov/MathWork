@@ -7,3 +7,4 @@ venv
 **/*.sql
 LBBASE_v_0_40/media/*.*
 backup
+/static/pdf_files/
