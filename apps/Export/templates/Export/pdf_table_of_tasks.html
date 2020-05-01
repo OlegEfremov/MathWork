@@ -19,7 +19,9 @@
     <style> .vakata-context {z-index:1100 !important;} </style>
 </head>
 <body>
-
+<div>
+    {{ aurl }}
+</div>
 <table class="table" id="task_table">
     {% for task in tasks %}
         <tr id = "{{ task.id }}" class="task">

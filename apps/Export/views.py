@@ -118,9 +118,10 @@ def show_tasks_for_pdf(request):
     solbodies = compile_image(solutions_set)
 
     template_path = "Export/pdf_table_of_tasks.html"
+    aurl = request.build_absolute_uri(reverse("show_tasks_for_pdf"))
 
     return render(request, template_path,
-            {'path': path, 'tasks': tasks, 'solutions_set': solutions_set, 'checkboxes': dict_checkboxes, 'taskbodies': taskbodies, 'solbodies': solbodies})
+            {'aurl': aurl, 'path': path, 'tasks': tasks, 'solutions_set': solutions_set, 'checkboxes': dict_checkboxes, 'taskbodies': taskbodies, 'solbodies': solbodies})
 
 #    return Pdfcrow.render(request, template_path,
 #            {'path': path, 'tasks': tasks, 'solutions_set': solutions_set, 'checkboxes': dict_cookie, 'taskbodies': taskbodies, 'solbodies': solbodies})
