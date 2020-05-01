@@ -77,8 +77,6 @@ def tasksource_tree(request, task_id=0):
 
     tree=[]
     tree.append(tasksourcetree)
-    print(3434567)
-    print(tree)
     treeJson = json.dumps(tree, ensure_ascii=False)
 
     return HttpResponse(treeJson, content_type='json')

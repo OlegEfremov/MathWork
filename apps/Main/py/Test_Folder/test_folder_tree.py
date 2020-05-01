@@ -66,7 +66,6 @@ def test_folder_new_child_chapter(request):
     new_test_folder = Test_Folder(name='Новая папка', parent=current_test_folder, system_name='DEFAULT', author=current_user)
     new_test_folder.save()
 
-    print(current_test_folder)
     return HttpResponse(current_test_folder_dbID)
 
 
@@ -145,7 +144,6 @@ def move_test_to_another_folder(request):
     test_id = request.POST.get('test_id')
     target_test_folder_id = request.POST.get('target_test_folder_id')
 
-    print(target_test_folder_id)
     target_test_folder = Test_Folder.objects.get(id=target_test_folder_id)
     test = Test_Generated.objects.get(id=test_id)
 

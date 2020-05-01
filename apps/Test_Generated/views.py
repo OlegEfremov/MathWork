@@ -264,7 +264,6 @@ def create_test_by_template(request):
     new_test.save()
 
     current_test_folder_id = request.POST.get('current_test_folder')
-    print(current_test_folder_id)
     current_test_folder = Test_Folder.objects.get(id = current_test_folder_id)
     current_test_folder.test.add(new_test)
 
@@ -427,7 +426,6 @@ def delete_template_task(request, pk):
 # @user_passes_test(editor_check)
 def delete_template_from_db(test_template_id):
 #    rec = Test_Generated.objects.get(id=test_template_id)
-    print(test_template_id)
     rec = get_object_or_none(Test_Template, id=test_template_id)
 
     if rec is not None:

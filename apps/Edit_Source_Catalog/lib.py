@@ -61,12 +61,10 @@ def makeSourceFolderTree_node(node):
         if len(leaf.chapters.all()) > 0 or len(leaf.tasknumbers.all()) > 0:
             b["children"] = True
         a["children"].append(b)
-    print(a['children'])
     return a['children']
 
 
 def makeSourceTree_node(node):
-    print(node)
     a={}
     a["text"] = node.name
     a["data"] = node.name

@@ -58,10 +58,7 @@ def copy_node(request):
         new_folder = recurs_for_copy_folder(data['new_parent_dbID'], data['dbID'], current_user)
 
     if data['dbType'] == 'Task_Number':
-        print(data['new_parent_dbID'])
-        print(data['dbID'])
-        print(data['old_parent_dbID'])
-
+        pass
     return HttpResponse('{}')
 
 

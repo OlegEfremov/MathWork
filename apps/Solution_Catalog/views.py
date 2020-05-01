@@ -103,7 +103,6 @@ def get_user_tree(request):
 
 def copy_move_remove_task_or_solution(request):
     data = json.loads(request.POST['data'])
-    print(data)
 
     if data['action_type'] == 'task_copy':
         if sol_folder_check(request.user, data['target_folder']):
@@ -326,7 +325,6 @@ def match_tasks_order_and_all_tasks_in_sol_folder(all_tasks, tasks_order):
     excepting_tasks_number = []
     for task in all_tasks:
         if not str(task.id) in tasks_order:
-            print(task)
             tasks_order[str(task.id)] = '1000000'
             excepting_tasks_number.append(str(task.id) + ' was added')
 
@@ -340,10 +338,7 @@ def match_tasks_order_and_all_tasks_in_sol_folder(all_tasks, tasks_order):
         del tasks_order[task]
 
     if excepting_tasks_number:
-        print('all_task and tasks_order are not the same set')
-        print(excepting_tasks_number)
-        print(tasks_order)
-
+        pass
     return tasks_order
 
 

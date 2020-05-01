@@ -164,13 +164,9 @@ def add_attribute_to_solution(data):
 
 
 def massive_action(data):
-    print(data)
     for p in data['checkbox_values']:
-        print(1)
         if data['checkbox_values'][p]:
-            print(2)
             if p.count('sol') != 0:
-                print(3)
                 sol_id = p.split('_')[-1]
                 temp_data = {'element_id': sol_id, 'target_folder': data['target_folder'],
                              'view_folder': data['view_folder'], 'attr_to_add': data['attr_to_add']}
@@ -182,7 +178,6 @@ def massive_action(data):
                 if data['action_type'] == 'massive_remove':
                     solution_remove(temp_data)
                 if data['action_type'] == 'massive_add_attribute_to_solution':
-                    print(4)
                     add_attribute_to_solution(temp_data)
 
     return HttpResponse('{}')

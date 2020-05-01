@@ -44,14 +44,12 @@ def write_checkbox_values(request):
 def get_or_create_star_folder(user):
     try:
         star_folder = user.star_folder
-        print(star_folder)
     except:
         new_star_folder = Star_Folder()
         new_star_folder.user = user
         new_star_folder.checkbox_values = json.dumps({})
         new_star_folder.save()
         star_folder = new_star_folder
-        print("empty_star_folder")
     return star_folder
 
 
@@ -178,7 +176,6 @@ def get_tex_with_pics(data):
 
         if checkbox_values['checkbox_solutions']:
             for sol in task.solutions.all():
-                print(sol)
                 if str(sol.id) in list_of_sols_id:
                     file_inner += '\n' + sol.name + ':\\ \\\\\n' + sol.body + '\\ \\\\'
 

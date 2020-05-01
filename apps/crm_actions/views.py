@@ -40,7 +40,6 @@ def copy_massive(request):
 
     list_values = json.loads(request.POST.get('list_values'))
     target_folder = Solution_Folder.objects.get(id = request.POST.get('target_folder'))
-    print(list_values)
     tasks, solutions = get_tasks_and_sols_from_values_list(list_values)
 
     for solution in solutions:

@@ -58,7 +58,9 @@ def deploy():
 def dump_local_db():
     time_str = datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d_%H%-M-%S')
 
-    dump_filename = 'backup/db/dump_' + time_str + '.sql'
+    # dump_filename = 'backup/db/dump_' + time_str + '.sql'
+
+    dump_filename = 'dump_' + time_str + '.sql'
 
     local('mysqldump --databases lbbase_db > ' + dump_filename + ' -u leobreslav -p')
 
@@ -72,13 +74,13 @@ def dump_prod_db():
 
     dump_filename = 'dump_' + time_str + '.sql'
 
-    run('mysqldump --databases lbbase_db > ' + dump_filename + ' -u leobreslav_mysql -p')
+    run('mysqldump --databases lbbase_db > ' + dump_filename + ' -u leobreslav -p')
 
     return dump_filename
 
 
 def replace_prod_db(dump_filename):
-    run('mysql -u leobreslav_mysql -p lbbase_db < ' + dump_filename)
+    run('mysql -u leobreslav -p lbbase_db < ' + dump_filename)
 
 
 def replace_local_db(dump_filename):

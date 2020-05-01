@@ -62,7 +62,6 @@ def show_tasks_cart(request):
     dict_cookie = dict()
     for lc in list_cookie:
         dict_cookie[lc] = request.COOKIES.get(lc, 'none')
-    print(dict_cookie)
 
     res = render(request, template_path, {'path': path, 'tasks': tasks, 'solutions_set': solutions_set})
     # сбрасываем галочки
@@ -139,8 +138,6 @@ def checkboxes_str(request):
             ret = ret + "1"
         else:
             ret = ret + "0"
-
-    print(ret)
 
     return ret
 

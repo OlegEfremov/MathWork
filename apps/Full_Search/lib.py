@@ -82,7 +82,7 @@ def filterQuery(node,q):
         elif (node['a_attr']['dbType'] == 'Solution'):
             t = t.exclude(id=dbID)
         return t
-    else: print(node['type'])
+    else: pass
 
     return False
 
