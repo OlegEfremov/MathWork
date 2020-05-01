@@ -98,13 +98,17 @@ def phantomjs_to_pdf(request):
     args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js",
             request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
 
-    subprocess.call(args, timeout=20)
+    try:
+        outcmd = subprocess.check_output(args)
+        res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
+        res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
 
-    res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
-    res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
+        os.chdir(original_dir)
+        return res
 
-    os.chdir(original_dir)
-    return res
+    except subprocess.CalledProcessError:
+        return HttpResponse(outcmd)
+
 
 
 # Показывает страницу со списком задач (для pdf экспорта)

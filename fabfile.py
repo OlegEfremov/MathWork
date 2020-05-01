@@ -48,7 +48,7 @@ def deploy():
         run('../LBBASEVENV/bin/python manage.py migrate')
 
         # collect static
-        run('../LBBASEVENV/bin/python manage.py collectstatic')
+#        run('../LBBASEVENV/bin/python manage.py collectstatic')
 
     # Start gunicorn
     start()
