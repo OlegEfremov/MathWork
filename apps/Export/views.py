@@ -94,10 +94,10 @@ def phantomjs_to_pdf(request):
     outcmd = "null"
 
     args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js",
-        "\""+request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request)+"\"", path + filename]
+        request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
 
     try:
-        outcmd = subprocess.check_output(args)
+        outcmd = subprocess.check_output(args, shell=True)
 
         res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
         res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
