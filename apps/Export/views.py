@@ -97,7 +97,7 @@ def phantomjs_to_pdf(request):
         request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
 
     try:
-        outcmd = subprocess.check_output(args, shell=True)
+        p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
         res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
@@ -105,7 +105,9 @@ def phantomjs_to_pdf(request):
         return res
 
     except Exception as e:
-        return HttpResponse("Ошибка phantomjs: " + str(e) + " вывод: " + outcmd)
+        outcmd = p.stdout.read()
+        outerr = p.stderr.read()
+        return HttpResponse("Ошибка phantomjs: " + str(e) + " вывод: " + outcmd + " ошибка: " + outerr)
 
 
 # Показывает страницу со списком задач (для pdf экспорта)
