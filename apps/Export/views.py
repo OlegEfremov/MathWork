@@ -89,7 +89,6 @@ def phantomjs_to_pdf(request):
         os.makedirs(path)
 
     original_dir = os.getcwd()
-    os.chdir(path)
     abs_url = request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request)
 
     if abs_url.find("localhost:8000") == -1 and abs_url.find("127.0.0.1:8000") == -1:
@@ -103,7 +102,6 @@ def phantomjs_to_pdf(request):
 
     res = FileResponse(open(path + filename, "rb"), content_type="application/pdf")
     res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
-    os.chdir(original_dir)
     return res
 
 
