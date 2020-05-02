@@ -178,8 +178,10 @@ STATICFILES_DIRS = [os.path.join('static'), ]
 
 LOGIN_REDIRECT_URL = '/'
 
-# SITE_ID = 1
+# IP адрес боевого сервера
+BATTLE_SERVER = "80.78.254.143"
 
+# SITE_ID = 1
 
 # LOGGING = {
 #     'version': 1,

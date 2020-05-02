@@ -10,7 +10,7 @@ import json
 # Create your views here.
 from django.urls import reverse
 
-from LBBASE_v_0_40.settings import PROJECT_ROOT
+from LBBASE_v_0_40.settings import PROJECT_ROOT, BATTLE_SERVER
 from apps.Main.constants import path, PASS_PDF, LIST_CHECKBOXES
 from apps.Main.decorators import admin_check
 from apps.Main.lib import get_current_user, get_user_param
@@ -93,7 +93,7 @@ def phantomjs_to_pdf(request):
     abs_url = request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request)
 
     if abs_url.find("localhost:8000") == -1 and abs_url.find("127.0.0.1:8000") == -1:
-        abs_url = abs_url.replace("localhost", "80.78.254.143")
+        abs_url = abs_url.replace("localhost", BATTLE_SERVER)
 
     args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js", abs_url, path + filename]
 
