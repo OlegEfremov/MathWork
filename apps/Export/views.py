@@ -90,9 +90,12 @@ def phantomjs_to_pdf(request):
 
     original_dir = os.getcwd()
     os.chdir(path)
-    aurl = request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request)
-    aurl = aurl.replace("localhost", "80.78.254.143")
-    args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js", aurl, path + filename]
+    abs_url = request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request)
+
+    if abs_url.find("localhost:8000") == -1 and abs_url.find("127.0.0.1:8000") == -1:
+        abs_url = abs_url.replace("localhost", "80.78.254.143")
+
+    args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js", abs_url, path + filename]
 
     menv = os.environ.copy()
     menv["QT_QPA_PLATFORM"] = "offscreen"
