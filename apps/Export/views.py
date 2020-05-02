@@ -95,7 +95,7 @@ def phantomjs_to_pdf(request):
 
     menv = os.environ.copy()
     menv["QT_QPA_PLATFORM"] = "offscreen"
-    subprocess.call(args, env=menv, shell=True)
+    subprocess.call(args, env=menv, timeout=20)
 
     res = FileResponse(open(path + filename, "rb"), content_type="application/pdf")
     res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
