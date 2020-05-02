@@ -117,8 +117,8 @@ def phantomjs_to_pdf(request):
 #        os.chdir(original_dir)
 #        return res
 
-    except Exception as e:
-        return HttpResponse("Ошибка phantomjs: " + str(e) + " вывод: " + outcmd)
+#    except Exception as e:
+#        return HttpResponse("Ошибка phantomjs: " + str(e) + " вывод: " + outcmd)
 
 
 # Показывает страницу со списком задач (для pdf экспорта)
