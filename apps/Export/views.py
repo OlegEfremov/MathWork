@@ -94,20 +94,29 @@ def phantomjs_to_pdf(request):
     args = ["phantomjs", "-platform", "offscreen", "/usr/share/doc/phantomjs/examples/rasterize.js",
         request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
 
-    try:
-        menv = os.environ.copy()
-        menv["QT_QPA_PLATFORM"] = "offscreen"
-        p = subprocess.Popen(args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=menv)
+    menv = os.environ.copy()
+    menv["QT_QPA_PLATFORM"] = "offscreen"
+    subprocess.call(args, env=menv, shell=True)
 
-        res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
-        res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
-        os.chdir(original_dir)
-        return res
+    res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
+    res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
+    os.chdir(original_dir)
+    return res
 
-    except Exception as e:
-        outcmd = p.stdout.read()
-        outerr = p.stderr.read()
-        return HttpResponse("Ошибка phantomjs: " + str(e) + " вывод: " + str(outcmd) + " ошибка: " + str(outerr))
+#    try:
+#        menv = os.environ.copy()
+#        menv["QT_QPA_PLATFORM"] = "offscreen"
+#        p = subprocess.Popen(args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=menv)
+
+#       res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
+#        res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
+#        os.chdir(original_dir)
+#        return res
+
+#    except Exception as e:
+#        outcmd = p.stdout.read()
+#        outerr = p.stderr.read()
+#        return HttpResponse("Ошибка phantomjs: " + str(e) + " вывод: " + str(outcmd) + " ошибка: " + str(outerr))
 
 
 # Показывает страницу со списком задач (для pdf экспорта)
