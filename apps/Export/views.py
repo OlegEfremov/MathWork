@@ -93,7 +93,7 @@ def phantomjs_to_pdf(request):
 
     outcmd = "null"
 
-    args = ["QT_QPA_PLATFORM=offscreen; ", "phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js",
+    args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js",
         request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
 
     try:
