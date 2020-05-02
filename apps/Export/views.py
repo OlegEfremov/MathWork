@@ -93,11 +93,14 @@ def phantomjs_to_pdf(request):
 
     try:
         aurl = request.build_absolute_uri(reverse("show_tasks_for_pdf"))
-        return HttpResponse("Все ОК: " + aurl)
 
         if aurl.find("127.0.0.1:8000") == -1 and aurl.find("localhost:8000")  == -1:
             args = ["export", "QT_QPA_PLATFORM=offscreen"]
+            return HttpResponse("Рабочий сервер: " + args)
+
             outcmd = subprocess.check_output(args)
+        else:
+            return HttpResponse("Локальный сервер: " + aurl)
 
     except Exception as e:
         return HttpResponse("Ошибка export: " + str(e) + " вывод " + outcmd)
