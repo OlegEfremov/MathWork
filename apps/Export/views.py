@@ -92,37 +92,20 @@ def phantomjs_to_pdf(request):
     os.chdir(path)
 
     outcmd = "null"
+
+    args = ["QT_QPA_PLATFORM=offscreen", "phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js",
+        request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
+
     try:
-        aurl = request.build_absolute_uri(reverse("show_tasks_for_pdf"))
-        sw = (aurl.find("127.0.0.1:8000") == -1 and aurl.find("localhost:8000")  == -1)
+        outcmd = subprocess.check_output(args)
 
-        if sw:
-            args = ["export", "QT_QPA_PLATFORM=offscreen"]
-#            return HttpResponse("Рабочий сервер: " + str(args))
-
-            outcmd = subprocess.check_output(args)
-        else:
-            return HttpResponse("Локальный сервер: " + aurl)
+        res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
+        res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
+        os.chdir(original_dir)
+        return res
 
     except Exception as e:
-        return HttpResponse("Ошибка export: " + str(e) + " вывод " + outcmd)
-    else:
-        return HttpResponse("Все ОК: " + path)
-
-
-#    args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js",
-#        request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
-
-#    try:
-#        outcmd = subprocess.check_output(args)
-
-#        res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
-#        res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
-#        os.chdir(original_dir)
-#        return res
-
-#    except Exception as e:
-#        return HttpResponse("Ошибка phantomjs: " + str(e) + " вывод: " + outcmd)
+        return HttpResponse("Ошибка phantomjs: " + str(e) + " вывод: " + outcmd)
 
 
 # Показывает страницу со списком задач (для pdf экспорта)
