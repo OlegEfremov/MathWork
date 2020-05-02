@@ -93,22 +93,25 @@ def phantomjs_to_pdf(request):
     aurl = request.build_absolute_uri(reverse("show_tasks_for_pdf"))
     if aurl.find("127.0.0.1:8000") == -1 and aurl.find("localhost:8000")  == -1:
         args =["export", "QT_QPA_PLATFORM=offscreen"]
-        subprocess.call(args)
+
+        try:
+            outcmd = subprocess.check_output(args)
+        except Exception as e:
+            return HttpResponse("Ошибка export: " + str(e) + " вывод " + outcmd)
 
     args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js",
-            request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
+        request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
 
     try:
         outcmd = subprocess.check_output(args)
+
         res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
         res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
-
         os.chdir(original_dir)
         return res
 
-    except subprocess.CalledProcessError:
-        return HttpResponse(outcmd)
-
+    except Exception as e:
+        return HttpResponse("Ошибка phantomjs: " + str(e) + " вывод: " + outcmd)
 
 
 # Показывает страницу со списком задач (для pdf экспорта)
