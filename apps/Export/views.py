@@ -95,7 +95,8 @@ def phantomjs_to_pdf(request):
         request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
 
     try:
-        menv = {"QT_QPA_PLATFORM": "offscreen"}
+        menv = os.environ.copy()
+        menv["QT_QPA_PLATFORM"] = "offscreen"
         p = subprocess.Popen(args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=menv)
 
         res = FileResponse(open(path + '/' + filename, "rb"), content_type="application/pdf")
