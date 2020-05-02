@@ -98,7 +98,7 @@ def phantomjs_to_pdf(request):
 
         if sw:
             args = ["export", "QT_QPA_PLATFORM=offscreen"]
-            return HttpResponse("Рабочий сервер: " + args)
+#            return HttpResponse("Рабочий сервер: " + str(args))
 
             outcmd = subprocess.check_output(args)
         else:
