@@ -93,8 +93,6 @@ def phantomjs_to_pdf(request):
         os.chdir(path)
     except Exception as e:
         return HttpResponse("Ошибка path: " + str(e) + " path: "+ path)
-    else:
-        return HttpResponse("Все ОК: "+path)
 
     aurl = request.build_absolute_uri(reverse("show_tasks_for_pdf"))
     if aurl.find("127.0.0.1:8000") == -1 and aurl.find("localhost:8000")  == -1:
