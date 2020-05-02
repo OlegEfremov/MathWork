@@ -91,7 +91,7 @@ def phantomjs_to_pdf(request):
     original_dir = os.getcwd()
     os.chdir(path)
 
-    args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js",
+    args = ["QT_QPA_PLATFORM=offscreen", "phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js",
         request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str(request), path + filename]
 
     try:
