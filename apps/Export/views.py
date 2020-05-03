@@ -102,6 +102,8 @@ def phantomjs_to_pdf(request):
 
     res = FileResponse(open(path + filename, "rb"), content_type="application/pdf")
     res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
+
+    os.remove(path+filename)
     return res
 
 
