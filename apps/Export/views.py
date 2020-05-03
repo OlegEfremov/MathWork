@@ -94,7 +94,7 @@ def phantomjs_to_pdf(request):
     if abs_url.find("localhost:8000") == -1 and abs_url.find("127.0.0.1:8000") == -1:
         abs_url = abs_url.replace("localhost", BATTLE_SERVER)
 
-    args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js", abs_url, path + filename]
+    args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js", abs_url, path + filename, "A4"]
 
     menv = os.environ.copy()
     menv["QT_QPA_PLATFORM"] = "offscreen"

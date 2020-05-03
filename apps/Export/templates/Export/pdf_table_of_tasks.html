@@ -26,7 +26,7 @@
             <td>
                 <b><span id="order_number_{{ task.id }}">№{{ forloop.counter }}</span> <span class="id_number" style="display: {{ checkboxes.id_number }}">(id-{{ task.id }}).</span></b>
                 <br>
-                <span class="task_body" style="display: {{ checkboxes.task_body }}">{% autoescape off %}{{ taskbodies|hashd:task.id }}{% endautoescape %}</span>
+                <span class="task_body" style="display: {{ checkboxes.task_body }}">{% autoescape off %}{{ taskbodies|hashd:task.id|linebreaks }}{% endautoescape %}</span>
                 <br>
             <div class="answer" style="display: {{ checkboxes.answer }}">
                 Ответ: {{ task.ans }}
@@ -52,7 +52,7 @@
                     {% if sol in solutions_set %}
                         <div class="solution" id="{{ sol.id }}">
                             {{ sol.name }}<br>
-                            {% autoescape off %}{{ solbodies|hashd:sol.id }}{% endautoescape %}
+                            {% autoescape off %}{{ solbodies|hashd:sol.id|linebreaks }}{% endautoescape %}
 
                             <div class="mathattr" style="display: {{ checkboxes.mathattr }}">
                             {% if not sol.mathAttribute.all  %}
@@ -75,7 +75,7 @@
                     {% if sol not in solutions_set %}
                         <div class="another_solution" id="{{ sol.id }}">
                             {{ sol.name }}<br>
-                            {% autoescape off %}{{ solbodies|hashd:sol.id }}{% endautoescape %}
+                            {% autoescape off %}{{ solbodies|hashd:sol.id|linebreaks }}{% endautoescape %}
 
                             <div class="mathattr" style="display: {{ checkboxes.mathattr }}">
                             {% if not sol.mathAttribute.all  %}
