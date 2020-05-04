@@ -95,6 +95,5 @@ def makeSourceTree_node(node):
             c["a_attr"] = {"dbType": "TaskNumber", "dbID": str(tnleaf.id)}
             c["children"] = []
             a["children"].append(c)
-    print(a['children'])
 
     return a['children']
