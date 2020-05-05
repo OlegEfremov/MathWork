@@ -205,23 +205,24 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="">
+                                            <a href="javascript: copy_squares_begin()">
                                                 <i class="fas fa-copy mr-1"></i>
                                                 <span>Копировать к себе в папку</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="">
-                                                <i class="fas fa-list-ol mr-1"></i>
-                                                <span>Создать работу</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <i class="fas fa-download mr-1"></i>
-                                                <span>Экспорт в tex/pdf/doc</span>
-                                            </a>
-                                        </li>
+{#                                      <li>     #}
+{#                                            <a href="javascript: $('#settings_for_export_to_file_modal').modal('show');">  #}
+{#                                                <i class="fas fa-list-ol mr-1"></i>  #}
+{#                                                <span>Создать работу</span>  #}
+{#                                            </a>  #}
+{#                                        </li>   #}
+
+ {#                                       <li>  #}
+ {#                                           <a href="">  #}
+ {#                                               <i class="fas fa-download mr-1"></i>  #}
+ {#                                               <span>Экспорт в tex/pdf/doc</span>  #}
+ {#                                           </a>  #}
+ {#                                       </li>  #}
                                     </ul>
                                 </li>
                                 {% endif %}
@@ -241,25 +242,25 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="">
+                                            <a href="javascript: copy_stars_begin()">
                                                 <i class="fas fa-copy mr-1"></i>
                                                 <span>Копировать к себе в папку</span>
                                             </a>
                                         </li>
+{#                                          <li>     #}
+{#                                            <a href="javascript: create_test_from_cart()"> #}   <!-- задекорировал reader -->
+{#                                               <i class="fas fa-list-ol mr-1"></i>   #}
+{#                                                <span>Создать работу</span>   #}
+{#                                           </a>   #}
+{#                                        </li>   #}
+{#                                        <li>  #}
+{#                                           <a href="javascript: $('#settings_for_export_to_file_modal').modal('show');">  #}
+{#                                                <i class="fas fa-download mr-1"></i>  #}
+{#                                                <span>Экспорт в tex/pdf/doc</span>  #}
+{#                                            </a>  #}
+{#                                        </li>  #}
                                         <li>
-                                            <a href="javascript: create_test_from_cart()">    <!-- задекорировал reader -->
-                                                <i class="fas fa-list-ol mr-1"></i>
-                                                <span>Создать работу</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <i class="fas fa-download mr-1"></i>
-                                                <span>Экспорт в tex/pdf/doc</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
+                                            <a href='location.href ="{% url 'phantomjs_to_pdf' %}"'>
                                                 <i class="fas fa-print mr-1"></i>
                                                 <span>Версия для печати</span>
                                             </a>
