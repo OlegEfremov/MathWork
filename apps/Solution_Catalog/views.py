@@ -7,6 +7,7 @@ import cairosvg
 import random
 
 from django.contrib.auth.decorators import user_passes_test
+from django.db.models import QuerySet
 
 from apps.Main.decorators import admin_check, reader_check, editor_check, sol_folder_check
 
@@ -342,15 +343,51 @@ def match_tasks_order_and_all_tasks_in_sol_folder(all_tasks, tasks_order):
     return tasks_order
 
 
+# Список задач узла и всех дочерних узлов
+def recurse_solutions_list(dbID, lst=[]):
+    sol_folder = Solution_Folder.objects.get(id=dbID)
+    solutions_set = sol_folder.solution.all()
+    for sol in solutions_set:
+        lst.append(sol.pk)
+
+    for child in sol_folder.subfolders.all():
+        recurse_solutions_list(child.pk, lst)
+
+    return lst
+
+
+# Оставляет в списке только уникальные значения
+def list_distinct(lst):
+    ret = []
+    for l in lst:
+        if l not in ret:
+            ret.append(l)
+
+    return ret
+
 def show_tasks(request):
     data = json.loads(request.POST['data'])
     dbID = data['solution_folder_dbID']
-    sol_folder = Solution_Folder.objects.get(id=dbID)
+    recurse = request.POST.get('recurse', 0)
 
-    solutions_set = sol_folder.solution.all()
+    sol_folder = Solution_Folder.objects.get(id=dbID)
+    if recurse == '0':
+        solutions_set = sol_folder.solution.all()
+    else:
+        sol_list = recurse_solutions_list(dbID)
+        sol_list = list_distinct(sol_list)
+        solutions_set = Solution.objects.filter(pk__in=sol_list)
+
     all_tasks = Task.objects.filter(solutions__in=solutions_set).distinct().order_by('id')
 
-    tasks_order = json.loads(sol_folder.tasks_order)
+    if recurse == '0':
+        tasks_order = json.loads(sol_folder.tasks_order)
+    else:
+        tasks_order = dict()
+        i = 1
+        for tsk in all_tasks:
+            tasks_order[str(tsk.pk)] = i
+            i = i+1
 
     # match if all_tasks and tasks_order the same
     tasks_order_new = match_tasks_order_and_all_tasks_in_sol_folder(all_tasks, tasks_order)

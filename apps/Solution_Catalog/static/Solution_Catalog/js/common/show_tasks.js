@@ -4,20 +4,20 @@ function get_per_page(){
 }
 
 
-function show_tasks(dbID, page, url){
+function show_tasks(dbID, page, url, recurse=0) {
     action_data['page'] = page;
     show_tasks_url = url;
     document.getElementById('table_of_tasks').innerHTML = 'Задачи загружаются...<br><img src="../../static/images/loader.gif">';
     // document.getElementById("checkbox_all").checked = false;
     let send_data = {
-        'solution_folder_dbID' : dbID
+            'solution_folder_dbID': dbID,
     };
     send_data = JSON.stringify(send_data);
 
     $.ajax({
         url: url,
         type: "POST",
-        data: {'data': send_data, 'page': page, 'per_page': get_per_page()},
+        data: {'data': send_data, 'page': page, 'per_page': get_per_page(), 'recurse': recurse},
         success: function(res) {
             MathJax.Hub.Startup.onload();
             document.getElementById('table_of_tasks').innerHTML = '';

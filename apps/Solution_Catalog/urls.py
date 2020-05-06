@@ -5,7 +5,7 @@ from apps.Solution_Catalog.views import get_main_tree, get_user_tree, \
     rename_solution_folder, delete_solution_folder, copy_solution_folder, \
     move_solution_folder, create_solution_folder, copy_move_remove_task_or_solution, \
     main_page, show_tasks, show_tasks_without_solution, create_solution_for_empty_tasks, \
-    show_tasks_outside_folders, reorder_tasks, export_folder, download_dynamic_text, create_task_in_folder,\
+    show_tasks_outside_folders, reorder_tasks, export_folder, download_dynamic_text, create_task_in_folder, \
     view_folder_as_test, change_folder_access_status
 
 urlpatterns = [
