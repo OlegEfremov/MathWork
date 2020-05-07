@@ -101,10 +101,38 @@ def phantomjs_to_pdf(request):
     subprocess.call(args, env=menv, timeout=20)
 
     res = FileResponse(open(path + filename, "rb"), content_type="application/pdf")
-    res['Content-Disposition'] = 'attachment; filename=%s' % '1.pdf'
+    res['Content-Disposition'] = 'attachment; filename=%s' % 'favorite_tasks.pdf'
 
     os.remove(path+filename)
     return res
+
+
+# Запуск PhantomJs для конверсии страницы в pdf c параметрами по умолчанию
+def phantomjs_to_pdf_default(request):
+    filename = generate_key(20) + ".pdf"
+    path = PROJECT_ROOT + '/static/pdf_files/'
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    original_dir = os.getcwd()
+    abs_url = request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str_default(request)
+
+    if abs_url.find("localhost:8000") == -1 and abs_url.find("127.0.0.1:8000") == -1:
+        abs_url = abs_url.replace("localhost", BATTLE_SERVER)
+
+    args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js", abs_url, path + filename, "A4"]
+
+    menv = os.environ.copy()
+    menv["QT_QPA_PLATFORM"] = "offscreen"
+    subprocess.call(args, env=menv, timeout=20)
+
+    res = FileResponse(open(path + filename, "rb"), content_type="application/pdf")
+    res['Content-Disposition'] = 'attachment; filename=%s' % 'favorite_tasks.pdf'
+
+    os.remove(path+filename)
+    return res
+
 
 
 # Показывает страницу со списком задач (для pdf экспорта)
@@ -151,6 +179,12 @@ def checkboxes_str(request):
 # Формируем get параметры для запроса
 def GET_param_str(request):
     ret = "?id="+str(request.user.id)+"&chb="+checkboxes_str(request)
+    return ret
+
+
+# Формируем get параметры для запроса по умолчанию
+def GET_param_str_default(request):
+    ret = "?id="+str(request.user.id)+"&chb=11000000"
     return ret
 
 
