@@ -1,10 +1,16 @@
+//Добавить атрибуты задаче
+function add_attr_to_task(data){
+
+}
+
 // Дерево всех атрибутов для формирования текущего фильтра
 $(function () {
 	$('#attr_tree').jstree({
-		'plugins': ['dnd', 'types'],
+		'plugins': ['dnd', 'types', 'contextmenu', "state"],
 		'core': {
 			'data': {
 				"url": "attr_tree",
+                'data' : function (node) {return { 'id' : node.id }},
 				"dataType": "json"
 			},
 			'dblclick_toggle': false,
@@ -13,6 +19,19 @@ $(function () {
 			'check_callback': false,
 			'themes':{'dots':false},
 		},
+		"contextmenu": {
+            "items": {
+                    "add_attr_to_task": {
+                        "separator_before": false,
+                        "separator_after": false,
+                        "_disabled": false,
+                        "label": "Добавить атрибут задаче",
+                        "action": function (data) {
+                            add_attr_to_task(data)
+                        }
+                    }
+                }
+            },
 		"types": {
 			"#": {
 				"valid_children": ["AND"]
