@@ -3,8 +3,18 @@ function get_per_page(){
     return e.options[e.selectedIndex].innerHTML;
 }
 
+// Состояние переключателя на странице Мои папки - Показывать задачи из вложенных папкок
+function switch_status(){
+    var e = document.getElementById('toggle_tasks_nested_catalog');
+    if (e == null) {return 0;}
+    if (e.checked){
+        return 1;
+    }else{
+        return 0;
+    }
+}
 
-function show_tasks(dbID, page, url, recurse=0) {
+function show_tasks(dbID, page, url) {
     action_data['page'] = page;
     show_tasks_url = url;
     document.getElementById('table_of_tasks').innerHTML = 'Задачи загружаются...<br><img src="../../static/images/loader.gif">';
@@ -17,7 +27,7 @@ function show_tasks(dbID, page, url, recurse=0) {
     $.ajax({
         url: url,
         type: "POST",
-        data: {'data': send_data, 'page': page, 'per_page': get_per_page(), 'recurse': recurse},
+        data: {'data': send_data, 'page': page, 'per_page': get_per_page(), 'recurse': switch_status()},
         success: function(res) {
             MathJax.Hub.Startup.onload();
             document.getElementById('table_of_tasks').innerHTML = '';

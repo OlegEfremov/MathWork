@@ -8,11 +8,10 @@
     <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/global_vars.js?mk"></script>
     <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/enable_disable_elements.js?vj"></script>
     <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/show_tasks.js?fgsd"></script>
-    <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/show_tasks_from_all_subfolders.js?fnsd"></script>
+    <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/show_tasks_from_all_subfolders.js?fysd"></script>
 
     <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/create_task_in_folder.js?"></script>
     <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/change_folder_access_status.js?v"></script>
-
 
     <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/edit_user_catalog.js?v"></script>
     <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/copy_move_remove_task_or_solution.js?jv"></script>
@@ -44,10 +43,16 @@
             <p>Выберите папку для просмотра задач:</p>
             {% block create_new_folder_button %}
             <p>
+                <div class="col-auto">
                 <a href="#" data-toggle="tooltip" title="Cоздать новую папку">
                     <button onclick="create_solution_folder()" class="btn btn-primary btn-sm">Новая папка </button>
-                </a>
-                <button onclick="show_tasks_from_all_subfolders()" class="btn btn-primary btn-sm">Показать задачи из вложенных папок</button>
+                </a>&nbsp;
+                <div class="toggle-checkbox checkbox-inline toggle-sm mrg-top-10" data-toggle="tooltip" data-placement="top" title="Показать задачи из вложенных папок">
+                            <input type="checkbox" name="toggle_tasks_nested_catalog" id="toggle_tasks_nested_catalog" onclick="show_tasks_from_all_subfolders()">
+                            <label for="toggle_tasks_nested_catalog">&nbsp;</label>
+                </div>
+                </div>
+{#                 <button onclick="show_tasks_from_all_subfolders()" class="btn btn-primary btn-sm">Показать задачи из вложенных папок</button>  #}
             </p>
             {% endblock %}
             <div id="system_solution_catalog">test</div>
