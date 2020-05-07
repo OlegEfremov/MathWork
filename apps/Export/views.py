@@ -115,18 +115,17 @@ def phantomjs_to_pdf_default(request):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    original_dir = os.getcwd()
+#    original_dir = os.getcwd()
     abs_url = request.build_absolute_uri(reverse("show_tasks_for_pdf"))+GET_param_str_default(request)
 
     if abs_url.find("localhost:8000") == -1 and abs_url.find("127.0.0.1:8000") == -1:
         abs_url = abs_url.replace("localhost", BATTLE_SERVER)
 
-    assert False
-
     args = ["phantomjs", "/usr/share/doc/phantomjs/examples/rasterize.js", abs_url, path + filename, "A4"]
 
     menv = os.environ.copy()
     menv["QT_QPA_PLATFORM"] = "offscreen"
+    assert False
     subprocess.call(args, env=menv, timeout=20)
 
     res = FileResponse(open(path + filename, "rb"), content_type="application/pdf")
