@@ -125,7 +125,6 @@ def phantomjs_to_pdf_default(request):
 
     menv = os.environ.copy()
     menv["QT_QPA_PLATFORM"] = "offscreen"
-    assert False
     subprocess.call(args, env=menv, timeout=20)
 
     res = FileResponse(open(path + filename, "rb"), content_type="application/pdf")
