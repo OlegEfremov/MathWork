@@ -1,8 +1,3 @@
-//Добавить атрибуты задаче
-function add_attr_to_task(data){
-
-}
-
 // Дерево всех атрибутов для формирования текущего фильтра
 $(function () {
 	$('#attr_tree').jstree({
@@ -24,14 +19,19 @@ $(function () {
                     "add_attr_to_task": {
                         "separator_before": false,
                         "separator_after": false,
-                        "_disabled": false,
+                        "_disabled": function (data) {
+                            var inst = $.jstree.reference(data.reference),
+                                node = inst.get_node(data.reference);
+                            if (node['a_attr']['dbType'] != 'MathAttribute'){return true}
+                            return false
+                        },
                         "label": "Добавить атрибут задаче",
                         "action": function (data) {
                             add_attr_to_task(data)
                         }
                     }
-                }
-            },
+            }
+        },
 		"types": {
 			"#": {
 				"valid_children": ["AND"]
@@ -72,3 +72,19 @@ $(function () {
 		}
 	});
 });
+
+//Добавить атрибуты задаче
+function add_attr_to_task(data){
+	let	sel = $('#attr_tree').jstree(true).get_selected();
+	if(!sel.length) { return false; }
+	sel = sel[0];
+
+	let nod = $('#attr_tree').jstree(true).get_node(sel)
+	let newnode = {
+		'type': 'MathAttr',
+		'text': nod.text,
+		'a_attr': { 'dbType': nod['a_attr']['dbType'], 'dbID' : nod['a_attr']['dbID'] }
+	}
+
+	$("#filter_tree").jstree().create_node('j3_1', newnode)
+}
