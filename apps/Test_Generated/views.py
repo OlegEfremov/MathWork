@@ -430,11 +430,6 @@ class TestTemplateUpdateView(UserPassesTestMixin, UpdateView):
         context['path'] = path
         return context
 
-    def form_valid(self, form):
-        print(form.instance.folders_and_numbers)
-        print(self.request.POST)
-        return super().form_valid(form)
-
 # Удаление шаблона теста задач
 @user_passes_test(editor_check)
 def delete_template_task(request, pk):
