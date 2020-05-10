@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea, TextInput, HiddenInput
 from apps.Main.models import Test_Template
 
 
@@ -6,4 +6,9 @@ from apps.Main.models import Test_Template
 class TestTemplateForm(ModelForm):
     class Meta:
         model = Test_Template
-        fields = ('name', 'comment', 'folders_and_numbers', 'is_permanent')
+        fields = ('name', 'comment', 'folders_and_numbers')
+        widgets = {
+            'comment': Textarea(attrs={'cols': 40, 'rows': 3}),
+            'name': TextInput(attrs={'size': '40'}),
+            'folders_and_numbers': HiddenInput(),
+        }

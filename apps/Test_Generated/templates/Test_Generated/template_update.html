@@ -6,6 +6,9 @@
     <title>Редактирование шаблона теста</title>
     {% include 'head_script.html' %}
 
+    <script src="{{ path.PROJECT_STATIC }}Test_Generated/js/get_array_of_folder_dbid.js?gh"></script>
+    <script src="{{ path.PROJECT_STATIC }}Test_Generated/js/get_array_of_inputs_values.js?by"></script>
+    <script src="{{ path.PROJECT_STATIC }}Test_Generated/js/collect_folders_and_numbers.js?ki"></script>
 </head>
 
 <body>
@@ -18,9 +21,24 @@
         <div class="row">
 
             <div class="col-auto">
-                <form method="post">
+                <form method="post" id="templ_form" onsubmit="collect_folders_and_numbers();">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <div style="background: #e4e3f9; border-radius: 5px; padding: 15px; border-width: 1px; border-style:solid; border-color: #b8b7cc">
+                        Шаблон работы:
+                        <div id="folders_for_test">
+                            {% for templ in folder_numbers_list %}
+                                <span id="folder_dbID_{{ templ.folder_dbID }}"><br>
+                                    <i class="fas fa-folder"></i>&nbsp;{{ templ.folder_name }}
+                                    - <input type="number" form="templ_form" step=1 value="{{ templ.num_of_tasks }}" min="1" style="width: 3em;" id="number_of_task_from_folder_{{ templ.folder_dbID }}">
+                                    - <button class="btn btn-link" onclick="javascript: this.parentNode.remove();">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
                     <input type="submit" value="Изменить">
                 </form>
             </div>

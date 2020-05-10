@@ -413,6 +413,27 @@ class TestTemplateUpdateView(UserPassesTestMixin, UpdateView):
     def test_func(self):
         return editor_check(self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        rec = Test_Template.objects.get(pk=self.kwargs["pk"])
+
+        folder_numbers_list = []
+        test_str = rec.folders_and_numbers.split('@')
+        for i in range(len(test_str)):
+            folder_dbID = test_str[i].split(',')[0]
+            num_of_tasks = test_str[i].split(',')[1]
+            sol_folder = Solution_Folder.objects.get(pk=folder_dbID)
+            folder_name = sol_folder.name
+            folder_numbers_list.append({'folder_dbID': folder_dbID, 'num_of_tasks': num_of_tasks, 'folder_name': folder_name})
+
+        context["folder_numbers_list"] = folder_numbers_list
+        context['path'] = path
+        return context
+
+    def form_valid(self, form):
+        print(form.instance.folders_and_numbers)
+        print(self.request.POST)
+        return super().form_valid(form)
 
 # Удаление шаблона теста задач
 @user_passes_test(editor_check)
