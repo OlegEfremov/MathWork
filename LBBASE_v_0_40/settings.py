@@ -183,22 +183,5 @@ BATTLE_SERVER = "80.78.254.143"
 
 # SITE_ID = 1
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-#             'class': 'logging.FileHandler',
-#             'filename': '/home/leobreslav/logs/django.log',
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['file'],
-#             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-#             'propagate': True,
-#         },
-#     },
-# }
-
+if not DEBUG:
+    LOGGING = get_env_variable('LOGGING')

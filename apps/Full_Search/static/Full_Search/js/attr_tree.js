@@ -25,9 +25,18 @@ $(function () {
                             if (node['a_attr']['dbType'] != 'MathAttribute'){return true}
                             return false
                         },
-                        "label": "Добавить атрибут задаче",
+                        "label": "Добавить атрибут текущему фильтру",
                         "action": function (data) {
                             add_attr_to_task(data)
+                        }
+                    },
+                    "show_tasks_in_filter": {
+                        "separator_before": false,
+                        "separator_after": false,
+                        "_disabled": false,
+                        "label": "Показать задачи, удовлетворяющие фильтру",
+                        "action": function (data) {
+                            show_tasks('1')
                         }
                     }
             }

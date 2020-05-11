@@ -75,7 +75,7 @@ def get_json_all_mathattr_in_filter(request):
     json_tree = request.POST['json_tree']
     json_tree = json.loads(json_tree)
     solutions = filterQuery(json_tree[0], Solution.objects.all())
-    tasks = Task.objects.all().filter(solutions__in=solutions).distinct()
+#    tasks = Task.objects.all().filter(solutions__in=solutions).distinct()
     mathattributes = MathAttribute.objects.all().filter(solutions__in = solutions).distinct()
 
     tree = (makeMathAttributeTree(mathattributes))
