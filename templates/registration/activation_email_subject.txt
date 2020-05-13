@@ -1,4 +1,4 @@
 {% load i18n %}
 {% load auth_extras %}
 
-{% trans "Account activation on" %} http://{% settings_value "BATTLE_SERVER" %}
+{% trans "Активация аккаунта на " %}&nbsp; http://{% settings_value "BATTLE_SERVER" %}

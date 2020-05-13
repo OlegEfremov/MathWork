@@ -42,14 +42,14 @@
 {% include "inc_sidebar_begin.html" %}
     <div class="container-fluid" style="overflow-x: auto">
         <div class="row">
-            <button onclick='download()'>Экспорт в ТеХ</button>
+{#             <button onclick='download()'>Экспорт в ТеХ</button>     #}
             <script src="{{ path.PROJECT_STATIC }}Main/export_as_file.js?dmnh"></script>
             <button onclick='location.href ="{% url 'phantomjs_to_pdf' %}"'>Экспорт в pdf</button>
                 {% if user.is_authenticated %}
                     <button onclick='copy_cart_to_folder()'>Копировать в свой каталог</button>
                     <button onclick='print()'>Печать</button>
                     <button onclick="$('#create_test_by_star_folder_modal').modal('show')">Cоздать тест</button>
-                    <button onclick='subtract_cart_from_folder()'>Исключить из папки</button>
+{#                       <button onclick='subtract_cart_from_folder()'>Исключить из папки</button>  #}
                 {% endif %}
                 <button onclick='clear_cart()'>Очистить избранное</button>
         </div>
