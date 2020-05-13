@@ -1,5 +1,6 @@
 from django import template
 from django.contrib.auth.models import Group
+from LBBASE_v_0_40 import settings
 
 register = template.Library()
 
@@ -7,6 +8,12 @@ register = template.Library()
 @register.filter
 def hashd(h, key):
     return h.get(key, "")
+
+
+# settings value
+@register.simple_tag
+def settings_value(name):
+    return getattr(settings, name, "")
 
 
 @register.filter(name='has_group')

@@ -1,7 +1,8 @@
 {% load i18n %}
+{% load auth_extras %}
 
 {% trans "Activate account at" %} {{ site.name }}:
 
-http://{{ BATTLE_SERVER }}{% url 'registration_activate' activation_key=activation_key %}
+http://{% settings_value "BATTLE_SERVER" %}{% url 'registration_activate' activation_key=activation_key %}
 
 {% blocktrans %}Link is valid for {{ expiration_days }} days.{% endblocktrans %}
