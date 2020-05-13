@@ -1,1 +1,1 @@
-{% load i18n %}{% trans "Account activation on" %} http://{{ settings.BATTLE_SERVER }}
+{% load i18n %}{% trans "Account activation on" %} http://{{ BATTLE_SERVER }}
