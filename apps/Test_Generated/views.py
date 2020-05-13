@@ -430,6 +430,7 @@ class TestTemplateUpdateView(UserPassesTestMixin, UpdateView):
         context['path'] = path
         return context
 
+
 # Удаление шаблона теста задач
 @user_passes_test(editor_check)
 def delete_template_task(request, pk):

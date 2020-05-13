@@ -137,12 +137,20 @@ LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not
 # AUTH_USER_EMAIL_UNIQUE = True
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'labreslav239@gmail.com'
-EMAIL_HOST_PASSWORD = 'amtro915kvadri'
-EMAIL_PORT = 587
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_HOST_USER = 'olegefremov70@mail.ru'
+EMAIL_HOST_PASSWORD = 'pWB5TkfG'
+EMAIL_PORT = 2525
 
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER = 'labreslav239@gmail.com'
+#EMAIL_HOST_PASSWORD = 'amtro915kvadri'
+#EMAIL_PORT = 587
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 # Internationalization
