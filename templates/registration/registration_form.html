@@ -12,10 +12,9 @@
 </head>
 <body>
     {% include "inc_sidebar_begin.html" %}
-
+    <h2>Регистрация нового пользователя</h2>
     <div class="container-fluid">
         <div class="row">
-                <h2>Регистрация нового пользователя</h2>
                 <form method="post" action=".">
       {% csrf_token %}
         {% if form.errors %}

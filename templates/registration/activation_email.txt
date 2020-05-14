@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load auth_extras %}
 
-{% trans "Активация аккаунта на" %} {{ site.name }}:
+{% trans "Активация аккаунта на" %} http://{% settings_value "BATTLE_SERVER" %}:
 
 http://{% settings_value "BATTLE_SERVER" %}{% url 'registration_activate' activation_key=activation_key %}
 
