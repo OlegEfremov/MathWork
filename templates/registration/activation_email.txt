@@ -1,8 +1,8 @@
 {% load i18n %}
 {% load auth_extras %}
 
-{% trans "Activate account at" %} {{ site.name }}:
+{% trans "Активация аккаунта на" %} {{ site.name }}:
 
 http://{% settings_value "BATTLE_SERVER" %}{% url 'registration_activate' activation_key=activation_key %}
 
-{% blocktrans %}Link is valid for {{ expiration_days }} days.{% endblocktrans %}
+{% blocktrans %}Ссылка активна в течение {{ expiration_days }} дней.{% endblocktrans %}
