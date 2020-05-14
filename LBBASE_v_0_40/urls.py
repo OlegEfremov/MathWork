@@ -24,7 +24,6 @@ class RegistrationViewUniqueEmail(RegistrationView):
     form_class = RegistrationFormUniqueEmail
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path(r'accounts/', include('django.contrib.auth.urls')),
