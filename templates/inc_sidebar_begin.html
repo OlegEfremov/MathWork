@@ -197,12 +197,12 @@
                                     </a>
                                 </li>
                                 <!-- Squares menu-->
-                                {% if request.user|access_group:"Readers" %}
                                 <li class="notifications dropdown mr-3">
                                     <span class="counter" id="square_counter">0(0)</span>
                                     <a href="" class="dropdown-toggle" data-toggle="dropdown" style="text-size: 20px">
                                         <i class="fas fa-check-square"></i>
                                     </a>
+                                {% if request.user|access_group:"Readers" %}
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="javascript: copy_squares_begin()">
@@ -228,7 +228,6 @@
                                 {% endif %}
                                 <!-- End Squares menu-->
                                 <!-- Stars menu-->
-                                {% if request.user|access_group:"Readers" %}
                                 <li class="notifications dropdown">
                                     <span class="counter" id="checkbox_counter">0(0)</span>
                                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
@@ -241,6 +240,7 @@
                                                 <span>Открыть Избранное</span>
                                             </a>
                                         </li>
+                                {% if request.user|access_group:"Readers" %}
                                         <li>
                                             <a href="javascript: copy_stars_begin()">
                                                 <i class="fas fa-copy mr-1"></i>
@@ -265,6 +265,7 @@
                                                 <span>Версия для печати</span>
                                             </a>
                                         </li>
+                                {% endif %}
                                         <li>
                                             <a href="javascript: clear_cart()">         <!-- чистый js задекорировать не могу -->
                                                 <i class="fas fa-eraser mr-1"></i>
@@ -273,7 +274,6 @@
                                         </li>
                                     </ul>
                                 </li>
-                               {% endif %}
                                  <!-- End Stars menu-->
 {#                                <li>#}
 {#                                    <a href="javascript:void(0);">#}

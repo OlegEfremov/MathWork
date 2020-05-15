@@ -16,6 +16,19 @@ def settings_value(name):
     return getattr(settings, name, "")
 
 
+# заиеняет заданную подстроку справа
+def rreplace(inp_str, repl_str):
+    pos = inp_str.rfind(repl_str)
+    return inp_str[0:pos] + inp_str[pos+len(repl_str):]
+
+
+@register.simple_tag
+def mystatic(st_file):
+    pth = getattr(settings, "PROJECT_ROOT", "")
+    pth = rreplace(pth, "LBBASE_v_0_40") + "static/" + st_file
+    return pth
+
+
 @register.filter(name='has_group')
 def has_group(user, group_name):
     group = Group.objects.get(name=group_name)
