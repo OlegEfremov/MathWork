@@ -97,7 +97,10 @@ def count_checkboxes(request):
 
     tasks = set(tasks) | set(another_tasks)
 
-    return HttpResponse(str(len(tasks))+ '('+str(len(solutions_set))+')')
+    st = str(len(tasks))+ '('+str(len(solutions_set))+')'
+    if st is None: st = '0(0)'
+
+    return HttpResponse(st)
 
 def count_squares(request):
     square_values = request.POST.get('square_values')
