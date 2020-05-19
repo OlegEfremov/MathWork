@@ -137,10 +137,10 @@ LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not
 # AUTH_USER_EMAIL_UNIQUE = True
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_HOST_USER = 'olegefremov70@mail.ru'
-EMAIL_HOST_PASSWORD = 'pWB5TkfG'
-EMAIL_PORT = 2525
+EMAIL_HOST = 'mail.labreslav.ru'
+EMAIL_HOST_USER = 'site@labreslav.ru'
+EMAIL_HOST_PASSWORD = 'Gnz034.pass'
+EMAIL_PORT = 465
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
@@ -187,7 +187,7 @@ STATICFILES_DIRS = [os.path.join('static'), ]
 LOGIN_REDIRECT_URL = '/'
 
 # IP адрес боевого сервера
-BATTLE_SERVER = "80.78.254.143"
+BATTLE_SERVER = "labreslav.ru"
 
 # SITE_ID = 1
 
