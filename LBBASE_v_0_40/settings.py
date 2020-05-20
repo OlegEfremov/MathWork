@@ -137,10 +137,10 @@ LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not
 # AUTH_USER_EMAIL_UNIQUE = True
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'mail.labreslav.ru'
+EMAIL_HOST = 'mail.hosting.reg.ru'
 EMAIL_HOST_USER = 'site@labreslav.ru'
 EMAIL_HOST_PASSWORD = 'Gnz034.pass'
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
@@ -150,7 +150,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 #EMAIL_HOST_USER = 'labreslav239@gmail.com'
 #EMAIL_HOST_PASSWORD = 'amtro915kvadri'
 #EMAIL_PORT = 587
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 # Internationalization
