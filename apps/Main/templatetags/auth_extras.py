@@ -45,9 +45,11 @@ def member_groups(user, group_name):
         return True
 
     if group_name == "Readers":
-        return user.groups.filter(name__in=("Readers", "Editors", "Freinds")).exists()
+        return user.groups.filter(name__in=("Moderators", "Readers", "Editors", "Freinds")).exists()
     elif group_name == "Editors":
-        return user.groups.filter(name="Editors").exists()
+        return user.groups.filter(name__in=("Moderators", "Editors")).exists()
+    elif group_name == "Moderators":
+        return user.groups.filter(name="Moderators").exists()
     elif group_name == "Freinds":
         return user.groups.filter(name="Freinds").exists()
 

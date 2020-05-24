@@ -8,9 +8,9 @@ from LBBASE_v_0_40.settings import MEDIA_URL
 from apps.Edit_MathAttribute_Catalog.views import makeAttributeTree
 from apps.Edit_Solution.forms import SolutionForm
 from apps.Edit_Solution.lib import makeSolAttrTree
-from apps.Main.constants import path
+from apps.Main.constants import path, TaskChangeTypes
 from apps.Main.decorators import editor_check
-from apps.Main.models import Solution, MathAttribute, MathAttribute_Folder, UploadedSolImages
+from apps.Main.models import Solution, MathAttribute, MathAttribute_Folder, UploadedSolImages, set_task_changed
 
 
 def main_page(request, sol_id):
@@ -86,6 +86,7 @@ def add_attr_to_sol(request):
     if node_dbType == 'MathAttribute':
         node = MathAttribute.objects.get(id=node_dbID)
         sol.mathAttribute.add(node)
+        set_task_changed(sol.task, TaskChangeTypes.mathattr, request.user)
 
     return HttpResponse('hi')
 
@@ -103,6 +104,7 @@ def delete_mathattribue_from_solution(request):
     if node_dbType == 'MathAttribute':
         node = MathAttribute.objects.get(id=node_dbID)
         sol.mathAttribute.remove(node)
+        set_task_changed(sol.task, TaskChangeTypes.mathattr, request.user)
 
     return HttpResponse('hi')
 

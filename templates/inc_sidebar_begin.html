@@ -130,6 +130,18 @@
                             </li>
                             <hr>
                             {% endif %}
+                            {% if request.user|access_group:"Moderators" %}
+                                <li class="nav-item active">
+                                    <a href="{% url "main_page_moderation" %}">
+                                        <span class="icon-holder">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="title">
+                                        Модерация
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endif %}
                                 <li class="nav-item active">
                                     <a href="{{ root_path }}export/main_page">
                                         <span class="icon-holder">

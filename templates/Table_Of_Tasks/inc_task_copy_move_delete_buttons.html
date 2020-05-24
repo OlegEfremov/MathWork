@@ -30,13 +30,16 @@
     <button onclick="add_attribute_task_begin('{{ task.id }}')" class="btn btn-link"  data-toggle="tooltip" data-placement="top" title="Добавить атрибуты всем решениям задачи"><i class="fas fa-clipboard-list"></i></button>
 {% endif %}
 
-
 {% if request.user|access_group:"Editors" %}
     <button onclick="location.href = ROOT_PATH+'edit_task/main_page_{{ task.id }}';" class="btn btn-link">
         <a href="#" data-toggle="tooltip" title="Редактировать задачу">
             <i class="fas fa-edit"></i>
         </a>
     </button>
+{% endif %}
+
+{% if user.is_authenticated and request.path == '/solution_catalog/show_tasks_moderation' and request.user|access_group:"Moderators" %}
+    <button name="accept_task" onclick='accept_changes_task(this)' style="transform:scale(1.5);" class="btn btn-link" value="false" id="accept_task_{{ task.id }}" title="Принять изменения"><i class="far fa-square"></i></button>
 {% endif %}
 
 

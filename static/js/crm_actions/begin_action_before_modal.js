@@ -149,3 +149,4 @@ function add_attribute_task_begin(task_id){
     document.getElementById('add_attribute_ModalLabel').innerHTML = 'Выберите атрибуты, которые нужно добавить ко всем решениям задачи?';
     $('#add_attribute_modal').modal('show')
 }
+

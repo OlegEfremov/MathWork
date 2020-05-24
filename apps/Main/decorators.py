@@ -3,7 +3,7 @@
 # @user_passes_test(editor_check)
 # def main_page():
 #
-
+from apps.Main.constants import TaskChangeTypes
 from apps.Main.models import Solution_Folder
 
 
@@ -47,12 +47,21 @@ def sol_folder_check(user, folder_id):
 
 
 # Проверочная функция декоратора @user_passes_test для Editor
+def moderator_check(user):
+    if not user.is_authenticated:
+        return False
+    if admin_check(user):
+        return True
+    return user.groups.filter(name="Moderators").exists()
+
+
+# Проверочная функция декоратора @user_passes_test для Editor
 def editor_check(user):
     if not user.is_authenticated:
         return False
     if admin_check(user):
         return True
-    return user.groups.filter(name="Editors").exists()
+    return user.groups.filter(name__in=("Moderators", "Editors")).exists()
 
 
 # Проверочная функция декоратора @user_passes_test для Reader
@@ -61,7 +70,7 @@ def reader_check(user):
         return False
     if admin_check(user):
         return True
-    return user.groups.filter(name__in=("Readers", "Editors", "Freinds")).exists()
+    return user.groups.filter(name__in=("Moderators", "Readers", "Editors", "Freinds")).exists()
 
 
 # Проверочная функция декоратора @user_passes_test для Admin
@@ -85,3 +94,5 @@ def superuser_check(user):
     if not user.is_authenticated:
         return False
     return user.is_superuser
+
+

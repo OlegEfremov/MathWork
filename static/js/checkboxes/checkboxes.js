@@ -100,6 +100,34 @@ function button_checkbox_sol(node) {
     set_task_checkbox_by_sols()
 }
 
+
+// Принять изменения в выбранной задаче (модерация)
+function accept_changes_task(node){
+    change_node_icon(node);
+
+    let task_id = node.id.replace('accept_task_','');
+
+    //change state value
+    if (node.value === 'false'){node.value = 'true'}
+    else {node.value = 'false'}
+
+    $.ajax({
+        type: 'POST',
+        url: 'accept_changes',
+        data: {
+            'task_id': task_id,
+        },
+        dataType: 'json',
+        success: function(data){},
+        error : function(error) {
+            console.log(error)
+        }
+    });
+}
+
+
+
+
 function button_checkbox_task(node) {
     change_node_icon(node);
 

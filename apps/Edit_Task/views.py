@@ -9,9 +9,10 @@ from LBBASE_v_0_40.settings import MEDIA_ROOT, MEDIA_URL
 from apps.Edit_Source_Catalog.lib import makeChapterTree_node, makeSourceTree_node, makeSourceFolderTree_node
 from apps.Edit_Task.forms import TaskForm
 from apps.Edit_Task.lib import makeTaskSourceTree, makeSourceTree, makeChapterTree
-from apps.Main.constants import path
+from apps.Main.constants import path, TaskChangeTypes
 from apps.Main.decorators import editor_check
-from apps.Main.models import TaskNumber, Task, Solution, Source_Folder, Chapter, Source, UploadedTaskImages
+from apps.Main.models import TaskNumber, Task, Solution, Source_Folder, Chapter, Source, UploadedTaskImages, \
+    set_task_changed
 
 import os
 
@@ -95,6 +96,7 @@ def delete_tasknumber_from_task(request):
     if node_dbType == 'taskNumber':
         node = TaskNumber.objects.get(id=node_dbID)
         task.taskNumber.remove(node)
+        set_task_changed(task, TaskChangeTypes.source, request.user)
 
     return HttpResponse('hi')
 
@@ -113,6 +115,7 @@ def add_task_number_to_task(request):
     if node_dbType == 'TaskNumber':
         node = TaskNumber.objects.get(id=node_dbID)
         task.taskNumber.add(node)
+        set_task_changed(task, TaskChangeTypes.source, request.user)
 
     return HttpResponse('hi')
 

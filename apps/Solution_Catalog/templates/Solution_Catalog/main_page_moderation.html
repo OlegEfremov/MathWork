@@ -1,0 +1,30 @@
+{% load auth_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Модерация</title>
+     {% include "head_script.html" %}
+
+    <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/global_vars.js?"></script>
+    <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/show_tasks.js?v"></script>
+    <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/show_tasks_moderation.js?v"></script>
+    <script src="{{ path.PROJECT_STATIC }}Solution_Catalog/js/common/init_main_page_moderation.js?f"></script>
+
+    <style> .vakata-context {z-index:1100 !important;} </style>
+</head>
+<body>
+
+{% include "inc_sidebar_begin.html" %}
+    <div class="container-fluid" style="overflow-x: auto">
+        <div class="row">
+            {% include "Solution_Catalog/common/page/inc_input_per_page.html" %}<br>
+        </div>
+        <br>
+        <div id="table_of_tasks"></div>
+
+    </div>
+{% include "inc_sidebar_end.html" %}
+
+</body>
+</html>

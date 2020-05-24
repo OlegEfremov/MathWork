@@ -9,7 +9,7 @@ import random
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import QuerySet
 
-from apps.Main.decorators import admin_check, reader_check, editor_check, sol_folder_check
+from apps.Main.decorators import admin_check, reader_check, editor_check, sol_folder_check, moderator_check
 
 random.seed()
 
@@ -23,7 +23,7 @@ import io
 from LBBASE_v_0_40.settings import MEDIA_ROOT
 from apps.Main.constants import path
 from apps.Main.lib import get_current_user
-from apps.Main.models import Solution_Folder, Task, Solution, MathAttribute, Test_Generated
+from apps.Main.models import Solution_Folder, Task, Solution, MathAttribute, Test_Generated, TaskChanged
 from apps.Solution_Catalog.sub_views.copy_move_remove_task_or_solution import task_copy, \
     task_move, task_remove, solution_copy, solution_move, solution_remove, massive_action, add_attribute_to_solution
 
@@ -43,6 +43,14 @@ def main_page(request):
             return render(request, 'Solution_Catalog/edit_system_catalog/main_page.html', {'path': path})
 
     return HttpResponse('{}')
+
+
+# Вывод страницы модерации
+def main_page_moderation(request):
+    if moderator_check(request.user):
+        return render(request, 'Solution_Catalog/main_page_moderation.html', {'path': path})
+    else:
+        return HttpResponseForbidden("У вас недостаточно прав для вывода этой страницы")
 
 
 def make_solution_folders_tree(rootElement):
@@ -281,6 +289,52 @@ def show_tasks_without_solution(request):
             'url': url, 'tasks_order': tasks_order, 'sol_folder': ''}
 
     return end_of_show_tasks(data)
+
+
+# Отбор задач для страницы модерирования
+@user_passes_test(moderator_check)
+def show_tasks_moderation(request):
+    all_tasks = Task.objects.filter(taskchanged__changed=True).distinct().order_by('id')
+    solutions_set = Solution.objects.filter(task__in=all_tasks)
+
+    tasks_order = dict()
+    i = 1
+    for tsk in all_tasks:
+        tasks_order[str(tsk.pk)] = i
+        i = i + 1
+
+    url = 'show_tasks_moderation'
+    template_path = 'Table_Of_Tasks/table_of_tasks.html'
+
+    data = {'all_tasks': all_tasks, 'solutions_set': solutions_set, 'request': request,
+            'template_path': template_path,
+            'url': url, 'tasks_order': tasks_order, 'sol_folder': ''}
+
+    return end_of_show_tasks(data)
+
+
+# Принять изменения в задаче на странице модерирования
+@user_passes_test(moderator_check)
+def accept_changes(request):
+    task_id = request.POST.get('task_id', 0)
+    if task_id == 0:
+        return
+
+    task = Task.objects.get(pk=task_id)
+    tc = TaskChanged.objects.filter(task=task)[0]
+    if tc.changed:
+        tc.newtask = False
+        tc.mathattr = False
+        tc.source = False
+        tc.solution = False
+        tc.editask = False
+
+        tc.changed = False
+    else:
+        tc.changed = True
+
+    tc.save()
+
 
 @user_passes_test(editor_check)
 def create_solution_for_empty_tasks(request):
