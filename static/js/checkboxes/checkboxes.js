@@ -111,6 +111,7 @@ function accept_changes_task(node){
     if (node.value === 'false'){node.value = 'true'}
     else {node.value = 'false'}
 
+
     $.ajax({
         type: 'POST',
         url: 'accept_changes',

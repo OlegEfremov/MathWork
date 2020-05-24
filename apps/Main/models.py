@@ -324,7 +324,7 @@ class TaskChanged(models.Model):
     solution = models.BooleanField(default=False)
     mathattr = models.BooleanField(default=False)
     source = models.BooleanField(default=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=False)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     changed_at = models.DateTimeField(auto_now=True)
 
 
@@ -349,3 +349,4 @@ def set_task_changed(task, change_type, user):
     tc.changed = True
     tc.user = user
     tc.save()
+    print(tc)
