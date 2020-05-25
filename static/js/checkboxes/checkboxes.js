@@ -111,7 +111,6 @@ function accept_changes_task(node){
     if (node.value === 'false'){node.value = 'true'}
     else {node.value = 'false'}
 
-
     $.ajax({
         type: 'POST',
         url: 'accept_changes',
@@ -119,9 +118,26 @@ function accept_changes_task(node){
             'task_id': task_id,
         },
         dataType: 'json',
-        success: function(data){},
+        success: function(data){
+            var el = document.getElementById('accept_responce_'+task_id)
+            if (node.value == 'true') {
+                el.innerText = "Принято";
+            }else{
+                el.innerText = "Сброшено";
+            }
+        },
         error : function(error) {
-            console.log(error)
+            var el = document.getElementById('accept_responce_'+task_id)
+            if (error.status == 200){
+                if (node.value == 'true') {
+                    el.innerText = "Принято";
+                }else{
+                    el.innerText = "Сброшено";
+                }
+            }else {
+                el.innerText = "Ошибка";
+                console.log(error)
+            }
         }
     });
 }

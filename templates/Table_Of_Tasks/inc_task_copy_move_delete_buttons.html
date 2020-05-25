@@ -39,7 +39,8 @@
 {% endif %}
 
 {% if user.is_authenticated and request.path == '/solution_catalog/show_tasks_moderation' and request.user|access_group:"Moderators" %}
-    <button name="accept_task" onclick='accept_changes_task(this)' style="transform:scale(1.5);" class="btn btn-link" value="false" id="accept_task_{{ task.id }}" title="Принять изменения"><i class="far fa-square"></i></button>
+    <button name="accept_task" onclick='accept_changes_task(this)' class="btn btn-link" value="false" id="accept_task_{{ task.id }}" title="Принять изменения"><i class="far fa-thumbs-up"></i></button>
+    <div id="accept_responce_{{ task.id }}"></div>
 {% endif %}
 
 

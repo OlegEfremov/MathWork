@@ -76,11 +76,11 @@
     </div>
 
 {% endblock %}
-
+{% if request.path != '/solution_catalog/show_tasks_moderation' %}
     <div class="btn-group" role="group">
         <button onclick="$('#settings_for_export_to_file_modal').modal('show');" class="btn btn-primary"  data-toggle="tooltip" data-placement="top" title="Экспорт папки в tex или pdf">TeX/PDF</button>
     </div>
-
+{% endif %}
 
 {#<div class="form-check">#}
 {#  <input class="form-check-input" type="checkbox" value="" id="show_pics" onclick="show_tasks_pics(this.checked)">#}
