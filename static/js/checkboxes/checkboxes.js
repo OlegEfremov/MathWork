@@ -100,7 +100,6 @@ function button_checkbox_sol(node) {
     set_task_checkbox_by_sols()
 }
 
-
 // Принять изменения в выбранной задаче (модерация)
 function accept_changes_task(node){
     change_node_icon(node);
