@@ -1,7 +1,7 @@
 {% load auth_extras %}
 <div class="btn-group" role="group">
 
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and request.path != '/solution_catalog/show_tasks_moderation' %}
         <button onclick="copy_task_begin('{{ task.id }}')" class="btn btn-link">
             <a href="#" data-toggle="tooltip" title="Копировать в">
                 <i class="fas fa-copy"></i>
@@ -26,7 +26,7 @@
     {% endif %}
 {% endif %}
 
-{% if user.is_authenticated and request.user|access_group:"Editors"%}
+{% if user.is_authenticated and request.user|access_group:"Editors" and request.path != '/solution_catalog/show_tasks_moderation' %}
     <button onclick="add_attribute_task_begin('{{ task.id }}')" class="btn btn-link"  data-toggle="tooltip" data-placement="top" title="Добавить атрибуты всем решениям задачи"><i class="fas fa-clipboard-list"></i></button>
 {% endif %}
 

@@ -16,8 +16,10 @@
     {% endif %}
 {% endif %}
 
-
+{% if request.path != '/solution_catalog/show_tasks_moderation' %}
     <button name="square_task" sols = "{{ task.solutions.all|join:', ' }}" task = "" onclick='button_square_task(this)' class="btn btn-link" value="false" id="square_task_{{ task.id }}"><i class="far fa-square"></i></button>
-
-    №{{ task.id }}. <button name="checkbox_task" sols = "{{ task.solutions.all|join:', ' }}" task = "" onclick='button_checkbox_task(this)' class="btn btn-link" value="false" id="checkbox_task_{{ task.id }}"><i class="far fa-star"></i></button>
-{#{% endif %}#}
+{% endif %}
+    №{{ task.id }}.
+{% if request.path != '/solution_catalog/show_tasks_moderation' %}
+<button name="checkbox_task" sols = "{{ task.solutions.all|join:', ' }}" task = "" onclick='button_checkbox_task(this)' class="btn btn-link" value="false" id="checkbox_task_{{ task.id }}"><i class="far fa-star"></i></button>
+{% endif %}

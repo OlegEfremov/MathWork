@@ -31,7 +31,7 @@
     <label for="toggle1">&nbsp;</label>
 </div>
 
-
+{% if request.path != '/solution_catalog/show_tasks_moderation' %}
 {% block checkboxes_page_all%}
     <div class="btn-group" role="group">
         <button name="checkbox_page" sols = "" task = "" onclick='button_checkbox_page(this)' class="btn btn-primary" value="false" id="checkbox_page" data-toggle="tooltip" data-placement="top" title="Все на странице"><i class="far fa-star mr-1 ml-1"></i></button>
@@ -76,7 +76,6 @@
     </div>
 
 {% endblock %}
-{% if request.path != '/solution_catalog/show_tasks_moderation' %}
     <div class="btn-group" role="group">
         <button onclick="$('#settings_for_export_to_file_modal').modal('show');" class="btn btn-primary"  data-toggle="tooltip" data-placement="top" title="Экспорт папки в tex или pdf">TeX/PDF</button>
     </div>
