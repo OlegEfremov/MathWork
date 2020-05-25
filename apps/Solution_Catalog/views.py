@@ -318,7 +318,7 @@ def show_tasks_moderation(request):
 def accept_changes(request):
     task_id = request.POST.get('task_id', 0)
     if task_id == 0:
-        return
+        return HttpResponse('')
 
     task = Task.objects.get(pk=task_id)
     tc = TaskChanged.objects.filter(task=task)[0]
@@ -334,6 +334,7 @@ def accept_changes(request):
         tc.changed = True
 
     tc.save()
+    return HttpResponse('')
 
 
 @user_passes_test(editor_check)
