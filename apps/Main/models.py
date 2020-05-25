@@ -349,4 +349,3 @@ def set_task_changed(task, change_type, user):
     tc.changed = True
     tc.user = user
     tc.save()
-    print(tc)
